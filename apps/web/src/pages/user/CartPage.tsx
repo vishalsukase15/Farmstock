@@ -4,6 +4,7 @@ import { ShoppingCart, Trash2, ArrowRight, ShieldCheck } from 'lucide-react';
 import { CartItem } from '../../types/index.js';
 import { formatINR } from '../../components/product/PriceDisplay.js';
 import api from '../../services/api.js';
+import { resolveAssetUrl } from '../../services/api.js';
 
 export const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -98,10 +99,10 @@ export const CartPage: React.FC = () => {
               >
                 <div className="flex items-center gap-4">
                   <img
-                    src={
+                    src={resolveAssetUrl(
                       item.product.images?.[0]?.url ||
                       'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=400'
-                    }
+                    )}
                     alt={item.product.name}
                     className="w-20 h-20 rounded-xl object-cover border border-slate-100 shrink-0"
                   />

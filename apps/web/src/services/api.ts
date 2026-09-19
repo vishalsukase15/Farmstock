@@ -1,12 +1,19 @@
 import axios from 'axios';
 
+export const API_ORIGIN = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${API_ORIGIN}/api`,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+export const resolveAssetUrl = (url: string) => {
+  if (!url || /^https?:\/\//i.test(url)) return url;
+  return `${API_ORIGIN}${url.startsWith('/') ? url : `/${url}`}`;
+};
 
 // Request interceptor for token
 api.interceptors.request.use((config) => {

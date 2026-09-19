@@ -4,7 +4,7 @@ import { MapPin, CheckCircle, Heart, Star, Tractor } from 'lucide-react';
 import { Product } from '../../types/index.js';
 import { PriceDisplay } from './PriceDisplay.js';
 import { useAuth } from '../../context/AuthContext.js';
-import api from '../../services/api.js';
+import api, { resolveAssetUrl } from '../../services/api.js';
 
 interface ProductCardProps {
   product: Product;
@@ -21,9 +21,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [saved, setSaved] = useState(initialWishlisted);
   const [isToggling, setIsToggling] = useState(false);
 
-  const mainImage = product.images?.find((img) => img.isPrimary)?.url ||
+  const mainImage = resolveAssetUrl(product.images?.find((img) => img.isPrimary)?.url ||
     product.images?.[0]?.url ||
-    'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?auto=format&fit=crop&q=80&w=800';
+    'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?auto=format&fit=crop&q=80&w=800');
 
   const handleToggleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();

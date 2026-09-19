@@ -4,6 +4,7 @@ import { Tractor, PlusCircle, Eye, Edit, Trash2, CheckCircle2, XCircle } from 'l
 import { Product } from '../../types/index.js';
 import { formatINR } from '../../components/product/PriceDisplay.js';
 import api from '../../services/api.js';
+import { resolveAssetUrl } from '../../services/api.js';
 
 export const MyProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -88,7 +89,7 @@ export const MyProductsPage: React.FC = () => {
               <div>
                 <div className="relative aspect-[16/9] bg-slate-100">
                   <img
-                    src={p.images?.[0]?.url || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=800'}
+                    src={resolveAssetUrl(p.images?.[0]?.url || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=800')}
                     alt={p.name}
                     className="w-full h-full object-cover"
                   />

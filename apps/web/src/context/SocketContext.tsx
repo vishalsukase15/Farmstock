@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useAuth } from './AuthContext.js';
+import { API_ORIGIN } from '../services/api.js';
 
 interface SocketContextType {
   socket: Socket | null;
@@ -15,8 +16,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // In dev Vite proxy routes /socket.io to http://localhost:5000
-    const newSocket = io({
+    const newSocket = io(API_ORIGIN || undefined, {
       autoConnect: true,
       withCredentials: true,
     });

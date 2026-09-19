@@ -18,6 +18,7 @@ import {
   Star,
 } from 'lucide-react';
 import { Product } from '../../types/index.js';
+import { resolveAssetUrl } from '../../services/api.js';
 import { PriceDisplay, formatINR } from '../../components/product/PriceDisplay.js';
 import { useAuth } from '../../context/AuthContext.js';
 import api from '../../services/api.js';
@@ -237,7 +238,7 @@ export const ProductDetailsPage: React.FC = () => {
         <div className="lg:col-span-7 space-y-4">
           <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-100 border border-slate-200 shadow-md">
             <img
-              src={images[selectedImageIndex]?.url}
+              src={resolveAssetUrl(images[selectedImageIndex]?.url)}
               alt={product.name}
               className="w-full h-full object-cover"
             />
@@ -262,7 +263,7 @@ export const ProductDetailsPage: React.FC = () => {
                     selectedImageIndex === idx ? 'border-primary-600 ring-2 ring-primary-400' : 'border-slate-200'
                   }`}
                 >
-                  <img src={img.url} alt="thumbnail" className="w-full h-full object-cover" />
+                  <img src={resolveAssetUrl(img.url)} alt="thumbnail" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
