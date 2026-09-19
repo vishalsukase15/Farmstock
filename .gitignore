@@ -2,6 +2,7 @@ node_modules/
 .env
 .env.*
 !.env.example
+!.env.production.example
 apps/api/uploads/
 apps/api/prisma/*.db
 dist/
