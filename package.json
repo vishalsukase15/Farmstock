@@ -1,0 +1,28 @@
+{
+  "name": "farmstock-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FARMSTOCK — Agricultural Equipment Marketplace System",
+  "scripts": {
+    "install:all": "npm --prefix apps/api install && npm --prefix apps/web install",
+    "dev:api": "npm --prefix apps/api run dev",
+    "dev:web": "npm --prefix apps/web run dev",
+    "db:generate": "npm --prefix apps/api run db:generate",
+    "db:push": "npm --prefix apps/api run db:push",
+    "db:seed": "npm --prefix apps/api run db:seed",
+    "build:web": "npm --prefix apps/web run build",
+    "build:api": "npm --prefix apps/api run build"
+  },
+  "keywords": [
+    "agriculture",
+    "marketplace",
+    "equipment",
+    "farming",
+    "react",
+    "express",
+    "socketio",
+    "prisma"
+  ],
+  "author": "FARMSTOCK Engineering",
+  "license": "ISC"
+}

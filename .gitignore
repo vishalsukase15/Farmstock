@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+apps/api/uploads/
+apps/api/prisma/*.db
+dist/
+apps/*/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
