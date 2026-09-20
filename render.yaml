@@ -4,7 +4,7 @@ services:
     runtime: node
     rootDir: apps/api
     buildCommand: npm install && npx prisma generate && npm run build
-    startCommand: npx prisma migrate deploy && npm start
+    startCommand: npx prisma db push && npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
@@ -22,7 +22,7 @@ services:
       - key: REFRESH_SECRET
         generateValue: true
       - key: CLIENT_URL
-        sync: false  # Set this to your Vercel URL after frontend deployment
+        value: https://farmstock-app.vercel.app
 
 databases:
   - name: farmstock-db
