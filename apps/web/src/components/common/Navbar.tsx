@@ -154,7 +154,7 @@ export const Navbar: React.FC = () => {
                 {/* Wishlist button */}
                 <Link
                   to="/wishlist"
-                  className="p-2 text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg transition-colors relative"
+                  className="hidden sm:inline-flex p-2 text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg transition-colors relative"
                   aria-label="Wishlist"
                 >
                   <Heart className="w-5 h-5" />
@@ -163,7 +163,7 @@ export const Navbar: React.FC = () => {
                 {/* Cart button */}
                 <Link
                   to="/cart"
-                  className="p-2 text-slate-600 hover:text-primary-700 hover:bg-slate-50 rounded-lg transition-colors relative"
+                  className="hidden sm:inline-flex p-2 text-slate-600 hover:text-primary-700 hover:bg-slate-50 rounded-lg transition-colors relative"
                   aria-label="Cart"
                 >
                   <ShoppingCart className="w-5 h-5" />
@@ -177,7 +177,7 @@ export const Navbar: React.FC = () => {
                 {/* Messages button */}
                 <Link
                   to="/chat"
-                  className="p-2 text-slate-600 hover:text-primary-700 hover:bg-slate-50 rounded-lg transition-colors relative"
+                  className="hidden sm:inline-flex p-2 text-slate-600 hover:text-primary-700 hover:bg-slate-50 rounded-lg transition-colors relative"
                   aria-label="Messages"
                 >
                   <MessageSquare className="w-5 h-5" />
@@ -193,7 +193,7 @@ export const Navbar: React.FC = () => {
                 </Link>
 
                 {/* User Dropdown */}
-                <div className="relative">
+                <div className="relative hidden sm:block">
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                     className="flex items-center gap-2 p-1 rounded-full border border-slate-200 hover:border-primary-500 transition-colors"
@@ -353,6 +353,41 @@ export const Navbar: React.FC = () => {
                 className="block py-2 text-sm font-semibold text-slate-800"
               >
                 {t('common.requests')}
+              </Link>
+              <Link
+                to="/wishlist"
+                className="block py-2 text-sm font-semibold text-slate-800"
+              >
+                Wishlist
+              </Link>
+              <Link
+                to="/cart"
+                className="block py-2 text-sm font-semibold text-slate-800"
+              >
+                Cart
+              </Link>
+              <Link
+                to="/chat"
+                className="block py-2 text-sm font-semibold text-slate-800"
+              >
+                Messages
+              </Link>
+            </>
+          )}
+          {!isAuthenticated && (
+            <>
+              <div className="pt-2 border-t border-slate-100" />
+              <Link
+                to="/login"
+                className="block py-2 text-sm font-semibold text-slate-800"
+              >
+                {t('common.login')}
+              </Link>
+              <Link
+                to="/signup"
+                className="block py-2 text-sm font-bold text-primary-700"
+              >
+                {t('common.signup')}
               </Link>
             </>
           )}

@@ -44,11 +44,10 @@ export const AddProductPage: React.FC = () => {
     pincode: '',
   });
 
-  const [imageUrls, setImageUrls] = useState<string[]>([
-    'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?auto=format&fit=crop&q=80&w=800',
-  ]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [newImageUrl, setNewImageUrl] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [mainPhotoIndex, setMainPhotoIndex] = useState(0);
 
   useEffect(() => {
     api.get('/categories').then((res) => {
@@ -94,6 +93,15 @@ export const AddProductPage: React.FC = () => {
 
   const handleRemoveImage = (idx: number) => {
     setImageUrls(imageUrls.filter((_, i) => i !== idx));
+    setMainPhotoIndex((current) => {
+      if (imageUrls.length <= 1) return 0;
+      if (idx === current) return idx === imageUrls.length - 1 ? current - 1 : current;
+      return idx < current ? current - 1 : current;
+    });
+  };
+
+  const handleSetMainPhoto = (idx: number) => {
+    setMainPhotoIndex(idx);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -118,7 +126,7 @@ export const AddProductPage: React.FC = () => {
         usageHours: formData.usageHours ? Number(formData.usageHours) : undefined,
         horsepower: formData.horsepower ? Number(formData.horsepower) : undefined,
         modelYear: formData.modelYear ? Number(formData.modelYear) : undefined,
-        images: imageUrls,
+        images: [imageUrls[mainPhotoIndex], ...imageUrls.filter((_, idx) => idx !== mainPhotoIndex)],
       };
 
       const res = await api.post('/products', payload);
@@ -479,10 +487,18 @@ export const AddProductPage: React.FC = () => {
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
-                {idx === 0 && (
+                {idx === mainPhotoIndex ? (
                   <span className="absolute bottom-1 left-1 bg-slate-900/80 text-white text-[9px] px-1.5 py-0.5 rounded">
                     Main Photo
                   </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleSetMainPhoto(idx)}
+                    className="absolute bottom-1 left-1 bg-white/95 text-slate-800 text-[9px] px-1.5 py-1 rounded font-bold shadow-sm hover:bg-primary-50 hover:text-primary-800"
+                  >
+                    Set as main photo
+                  </button>
                 )}
               </div>
             ))}

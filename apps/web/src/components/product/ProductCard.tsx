@@ -21,9 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [saved, setSaved] = useState(initialWishlisted);
   const [isToggling, setIsToggling] = useState(false);
 
-  const mainImage = resolveAssetUrl(product.images?.find((img) => img.isPrimary)?.url ||
-    product.images?.[0]?.url ||
-    'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?auto=format&fit=crop&q=80&w=800');
+  const mainImage = product.images?.find((img) => img.isPrimary)?.url || product.images?.[0]?.url;
 
   const handleToggleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,12 +59,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     <div className="group bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:border-primary-400">
       {/* Image container */}
       <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-        <img
-          src={mainImage}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-        />
+        {mainImage ? (
+          <img
+            src={resolveAssetUrl(mainImage)}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-400">
+            <Tractor className="w-10 h-10" />
+            <span className="text-xs font-medium">No photo available</span>
+          </div>
+        )}
 
         {/* Badges Overlay */}
         <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 items-center">
