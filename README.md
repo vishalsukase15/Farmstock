@@ -28,7 +28,7 @@
 
 - **Frontend**: React 18, Vite, TypeScript, Tailwind CSS, Lucide React, TanStack Query, i18next, Recharts
 - **Backend**: Node.js, Express.js, TypeScript, Socket.IO, Zod, JWT Auth, Multer, bcryptjs
-- **Database**: PostgreSQL / SQLite with Prisma ORM (20+ normalized relational models)
+- **Database**: MongoDB with Mongoose ODM (Document-based collections)
 - **Real-Time**: Socket.IO WebSockets
 
 ---
